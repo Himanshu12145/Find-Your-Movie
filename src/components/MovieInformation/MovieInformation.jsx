@@ -51,10 +51,11 @@ const MovieInformation = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
-  // const { data: recommendations } = useGetRecommendationsQuery({
-  //   id,
-  //   list: "/recommendations",
-  // });
+  const { data: recommendations, isFetching: isRecommendationsFetching } =
+    useGetRecommendationsQuery({
+      id,
+      list: "/recommendations",
+    });
   // const { data: favoriteMovies } = useGetListQuery({
   //   listName: "favorite/movies",
   //   accountId: user.id,
@@ -78,7 +79,7 @@ const MovieInformation = () => {
   //     !!watchlistMovies?.results?.find((movie) => movie?.id === data?.id)
   //   );
   // }, [watchlistMovies, data]);
-  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   // const [isMovieFavorited, setIsMovieFavorited] = useState(false);
   // const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
   const isMovieFavorited = true;
@@ -240,7 +241,11 @@ const MovieInformation = () => {
                 >
                   IMDB
                 </Button>
-                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>
+                <Button
+                  onClick={() => setOpen(true)}
+                  href="#"
+                  endIcon={<Theaters />}
+                >
                   Trailer
                 </Button>
               </ButtonGroup>
@@ -278,7 +283,7 @@ const MovieInformation = () => {
           </BtnsContainer>
         </Grid>
       </Grid>
-      {/* <Box marginTop="5rem" width="100%">
+      <Box marginTop="5rem" width="100%">
         <Typography variant="h3" gutterBottom align="center">
           You might also like
         </Typography>
@@ -287,8 +292,8 @@ const MovieInformation = () => {
         ) : (
           <Box>Sorry, nothing was found.</Box>
         )}
-      </Box> */}
-      {/* <StyledModal
+      </Box>
+      <StyledModal
         closeAfterTransition
         open={open}
         onClose={() => setOpen(false)}
@@ -296,13 +301,13 @@ const MovieInformation = () => {
         {data?.videos?.results?.length > 0 && (
           <Video
             autoPlay
-            frameBorder="0"
+            frameBorder={0}
             title="Trailer"
             src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
             allow="autoplay"
           />
         )}
-      </StyledModal> */}
+      </StyledModal>
     </ContainerSpaceAround>
   );
 };
