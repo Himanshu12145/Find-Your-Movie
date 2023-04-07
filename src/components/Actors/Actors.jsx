@@ -8,14 +8,14 @@ import {
 import { ArrowBack } from "@mui/icons-material";
 import MovieList from "../MovieList/MovieList";
 import { Img } from "./styles";
-// import Pagination from "../Pagination/Pagination";
+import Pagination from "../Pagination/Pagination";
 
 const Actors = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isFetching, error } = useGetActorQuery(id);
-  // const [page, setPage] = useState(1);
-  const page = 1;
+  const [page, setPage] = useState(1);
+  // const page = 1;
   const { data: movies } = useGetMoviesByActorQuery({ id, page });
 
   if (isFetching) {
@@ -93,11 +93,11 @@ const Actors = () => {
           Movies
         </Typography>
         {movies && <MovieList movies={movies} limit={12} />}
-        {/* <Pagination
+        <Pagination
           currentPage={page}
           setPage={setPage}
           totalPages={movies?.total_pages}
-        /> */}
+        />
       </Box>
     </>
   );
