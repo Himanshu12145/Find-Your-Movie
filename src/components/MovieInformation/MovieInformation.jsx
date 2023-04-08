@@ -43,10 +43,10 @@ import {
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 // import { selectCategory } from "../../features/categorySlice";
 import MovieList from "../MovieList/MovieList";
-// import { userSelector } from "../../features/authSlice";
+import { userSelector } from "../../features/auth";
 
 const MovieInformation = () => {
-  // const { user } = useSelector(userSelector);
+  const { user } = useSelector(userSelector);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -56,61 +56,59 @@ const MovieInformation = () => {
       id,
       list: "/recommendations",
     });
-  // const { data: favoriteMovies } = useGetListQuery({
-  //   listName: "favorite/movies",
-  //   accountId: user.id,
-  //   sessionId: localStorage.getItem("session_id"),
-  //   page: 1,
-  // });
-  // const { data: watchlistMovies } = useGetListQuery({
-  //   listName: "watchlist/movies",
-  //   accountId: user.id,
-  //   sessionId: localStorage.getItem("session_id"),
-  //   page: 1,
-  // });
-  // useEffect(() => {
-  //   setIsMovieFavorited(
-  //     !!favoriteMovies?.results?.find((movie) => movie?.id === data?.id)
-  //   );
-  // }, [favoriteMovies, data]);
+  const { data: favoriteMovies } = useGetListQuery({
+    listName: "favorite/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  const { data: watchlistMovies } = useGetListQuery({
+    listName: "watchlist/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  useEffect(() => {
+    setIsMovieFavorited(
+      !!favoriteMovies?.results?.find((movie) => movie?.id === data?.id)
+    );
+  }, [favoriteMovies, data]);
 
-  // useEffect(() => {
-  //   setIsMovieWatchlisted(
-  //     !!watchlistMovies?.results?.find((movie) => movie?.id === data?.id)
-  //   );
-  // }, [watchlistMovies, data]);
+  useEffect(() => {
+    setIsMovieWatchlisted(
+      !!watchlistMovies?.results?.find((movie) => movie?.id === data?.id)
+    );
+  }, [watchlistMovies, data]);
   const [open, setOpen] = useState(false);
-  // const [isMovieFavorited, setIsMovieFavorited] = useState(false);
-  // const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
-  const isMovieFavorited = true;
-  const isMovieWatchlisted = true;
+  const [isMovieFavorited, setIsMovieFavorited] = useState(false);
+  const [isMovieWatchlisted, setIsMovieWatchlisted] = useState(false);
 
   const addToFavorites = async () => {
-    // await axios.post(
-    //   `https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${
-    //     process.env.REACT_APP_TMDB_KEY
-    //   }&session_id=${localStorage.getItem("session_id")}`,
-    //   {
-    //     media_type: "movie",
-    //     media_id: id,
-    //     favorite: !isMovieFavorited,
-    //   }
-    // );
-    // setIsMovieFavorited((prev) => !prev);
+    await axios.post(
+      `https://api.themoviedb.org/3/account/${user.id}/favorite?api_key=${
+        process.env.REACT_APP_TMDB_KEY
+      }&session_id=${localStorage.getItem("session_id")}`,
+      {
+        media_type: "movie",
+        media_id: id,
+        favorite: !isMovieFavorited,
+      }
+    );
+    setIsMovieFavorited((prev) => !prev);
   };
 
   const addToWatchlist = async () => {
-    // await axios.post(
-    //   `https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${
-    //     process.env.REACT_APP_TMDB_KEY
-    //   }&session_id=${localStorage.getItem("session_id")}`,
-    //   {
-    //     media_type: "movie",
-    //     media_id: id,
-    //     watchlist: !isMovieWatchlisted,
-    //   }
-    // );
-    // setIsMovieWatchlisted((prev) => !prev);
+    await axios.post(
+      `https://api.themoviedb.org/3/account/${user.id}/watchlist?api_key=${
+        process.env.REACT_APP_TMDB_KEY
+      }&session_id=${localStorage.getItem("session_id")}`,
+      {
+        media_type: "movie",
+        media_id: id,
+        watchlist: !isMovieWatchlisted,
+      }
+    );
+    setIsMovieWatchlisted((prev) => !prev);
   };
   if (isFetching) {
     return (
