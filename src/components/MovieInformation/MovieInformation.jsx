@@ -164,7 +164,7 @@ const MovieInformation = () => {
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
-            {data?.runtime}min | Language: {data?.spoken_languages[0].name}
+            {data?.runtime} min | Language: {data?.spoken_languages[0].name}
           </Typography>
         </ContainerSpaceAround>
         <GenresContainer item>
