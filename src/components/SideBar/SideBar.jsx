@@ -37,8 +37,11 @@ const SideBar = ({ setMobileOpen }) => {
   const classes = useStyles();
   const { data, isFetching, error } = useGetGenresQuery();
   const dispatch = useDispatch();
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
 
-  console.log(data, isFetching, error);
+  // console.log(data, isFetching, error);
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -61,7 +64,7 @@ const SideBar = ({ setMobileOpen }) => {
                 <img
                   src={genreIcons[label.toLowerCase()]}
                   alt="ListItem"
-                  className={classes.genreImages}
+                  className={classes.genreImage}
                   height={30}
                 />
               </ListItemIcon>
@@ -88,7 +91,7 @@ const SideBar = ({ setMobileOpen }) => {
                   <img
                     src={genreIcons[name.toLowerCase()]}
                     alt="ListItem"
-                    className={classes.genreImages}
+                    className={classes.genreImage}
                     height={30}
                   />
                 </ListItemIcon>

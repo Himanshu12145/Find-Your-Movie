@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AppBar,
   IconButton,
@@ -21,12 +21,14 @@ import { useTheme } from "@mui/material/styles";
 import { Search, SideBar } from "..";
 import { createSessionId, fetchToken, moviesApi } from "../../utils";
 import { setUser, userSelector } from "../../features/auth";
+import { ColorModeContext } from "../../utils/ToggleColorMode";
 const NavBar = () => {
   const classes = useStyles();
   const { isAuthenticated, user } = useSelector(userSelector);
   const isMobile = useMediaQuery("(max-width: 600px)");
   const theme = useTheme();
   const dispatch = useDispatch();
+  const colorMode = useContext(ColorModeContext);
   const [mobileOpen, setMobileOpen] = useState(false);
   const token = localStorage.getItem("request_token");
   const sessionIdLS = localStorage.getItem("session_id");
@@ -67,7 +69,11 @@ const NavBar = () => {
             </IconButton>
           )}
           {/* Here can have the button for dark or light mode or some things else fro md and sm devices replace the below IconButton*/}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+          <IconButton
+            color="inherit"
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+          >
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobile && <Search />}
@@ -89,7 +95,7 @@ const NavBar = () => {
                 <Avatar
                   style={{ width: 30, height: 30 }}
                   alt="profile"
-                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                  src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user?.avatar?.tmdb?.avatar_path}`}
                 />
               </Button>
             )}
