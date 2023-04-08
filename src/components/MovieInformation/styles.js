@@ -41,10 +41,13 @@ export const Links = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const BtnsContainer = styled(Grid)(({ theme }) => ({
+export const BtnsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   width: "100%",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  },
 }));
 
 export const Poster = styled("img")(({ theme }) => ({
