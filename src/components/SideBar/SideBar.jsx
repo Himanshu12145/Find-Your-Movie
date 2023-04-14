@@ -17,8 +17,7 @@ import { useGetGenresQuery } from "../../services/TMDB";
 import genreIcons from "../../assets/genres";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
-const redLogo =
-  "https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png";
+const redLogo = " ";
 const blueLogo =
   "https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png";
 
@@ -44,13 +43,6 @@ const SideBar = ({ setMobileOpen }) => {
   // console.log(data, isFetching, error);
   return (
     <>
-      <Link to="/" className={classes.imageLink}>
-        <img
-          className={classes.image}
-          src={theme.palette.mode === "light" ? redLogo : blueLogo}
-          alt="FilmPire logo"
-        />
-      </Link>
       <Divider />
       <List>
         <ListSubheader>Categories</ListSubheader>
