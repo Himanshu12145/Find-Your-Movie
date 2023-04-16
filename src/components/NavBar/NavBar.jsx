@@ -68,10 +68,10 @@ const NavBar = () => {
               <Menu />
             </IconButton>
           )}
-          <div style={{ fontSize: 30, color: "black" }}>
-            <span style={{ color: "#D1D1D1" }}>F</span>ind{" "}
-            <span style={{ color: "#D1D1D1" }}>Y</span>our{" "}
-            <span style={{ color: "#D1D1D1" }}>M</span>ovie
+          <div style={{ fontSize: 22, color: "black" }}>
+            <span style={{ fontSize: 30, color: "#D1D1D1" }}>F</span>ind{" "}
+            <span style={{ fontSize: 30, color: "#D1D1D1" }}>Y</span>our{" "}
+            <span style={{ fontSize: 30, color: "#D1D1D1" }}>M</span>ovie
           </div>
 
           {/* Here can have the button for dark or light mode or some things else fro md and sm devices replace the below IconButton*/}
