@@ -1,1 +1,2 @@
-# Cineverse - Movie application
+# FindYourMovie - Movie application
+[https://findyourmoviedb.netlify.app/]
